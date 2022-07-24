@@ -9,7 +9,8 @@ export default {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
     width: dimensions.width,
-    height: dimensions.height
+    height: dimensions.height,
+    backgroundColor: 0xffffff,
   },
   scene: [Boot, Home, Gameplay]
 };

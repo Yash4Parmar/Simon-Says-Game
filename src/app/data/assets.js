@@ -1,7 +1,7 @@
 export default {
   sprites: {
     pathPrefix: './assets/',
-    PNGs: ['blue', 'green', 'red', 'yellow', 'submit', 'GameOver'],
+    PNGs: ['blue', 'blue2', 'GameOver', 'green', 'pink', 'purple', 'red', 'start', 'submit', 'yellow', 'yellow2'],
     JPGs: [],
   },
 

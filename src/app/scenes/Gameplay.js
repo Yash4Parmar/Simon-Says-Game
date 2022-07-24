@@ -8,8 +8,11 @@ export default class Gameplay extends Phaser.Scene {
         this.sqr3 = this.add.sprite(520, 460, 'red').setOrigin(0.5, 0.5).setInteractive();
         this.sqr4 = this.add.sprite(520, 240, 'yellow').setOrigin(0.5, 0.5).setInteractive();
 
-        this.submit = this.add.sprite(820, 240, 'submit').setOrigin(0.5, 0.5).setInteractive();
-        this.gameover = this.add.sprite(640, 360, 'GameOver').setOrigin(0.5, 0.5);
+        // this.stage.backgroundColor = "#ffffff";
+
+        this.start = this.add.sprite(820, 240, 'start').setOrigin(0.5, 0.5).setInteractive().setScale(0.6);
+        this.submit = this.add.sprite(820, 440, 'submit').setOrigin(0.5, 0.5).setInteractive().setScale(0.6);
+        this.gameover = this.add.sprite(640, 360, 'GameOver').setOrigin(0.5, 0.5).setScale(2);
         this.gameover.visible = false;
         this.tileArray = [this.sqr1, this.sqr2, this.sqr3, this.sqr4];
         this.userArr = [];
@@ -21,7 +24,7 @@ export default class Gameplay extends Phaser.Scene {
         this.sqr3.imgId = 2;
         this.sqr4.imgId = 3;
 
-        this.choseRandomTile();
+
 
         this.sqr1.on('pointerdown', this.onColorClick.bind(this, this.sqr1));
         this.sqr2.on('pointerdown', this.onColorClick.bind(this, this.sqr2));
@@ -30,11 +33,13 @@ export default class Gameplay extends Phaser.Scene {
 
 
         this.submit.on('pointerdown', () => {
-            if (!this.canClick) {
-                // console.log("canClick false");
-                return;
-            }
+            if (!this.canClick) { return; }
             this.compareArrays();
+        });
+
+        this.start.on('pointerdown', () => {
+            if (!this.canClick) { return; }
+            this.choseRandomTile();
         });
     }
 
@@ -72,6 +77,18 @@ export default class Gameplay extends Phaser.Scene {
         return bool;
     }
 
+    gameOver() {
+        this.tweens.add({
+            targets: this.gameover,
+            ease: 'Power2',
+            duration: 200,
+            delay: 200 * i,
+            scale: { from: 1 },
+            alpha: { start: 0, to: 1 },
+            onStart: () => { '' }
+        });
+
+    }
     choseRandomTile() {
         // console.log("choseRandomTile()");
         let randomIndex = Math.floor(Math.random() * this.tileArray.length);
